@@ -28,6 +28,33 @@
       ul { padding-left: 1.4rem; }
       a { color: #1261a0; }
       .meta { margin: 0; color: #52606d; }
+      .language-switcher {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 20px;
+      }
+      .language-button {
+        appearance: none;
+        border: 1px solid #9fb3c8;
+        border-radius: 999px;
+        background: #fff;
+        color: #102a43;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 600;
+        padding: 8px 14px;
+      }
+      .language-button:hover { background: #f0f4f8; }
+      .language-button:focus-visible {
+        outline: 3px solid #7cc4fa;
+        outline-offset: 2px;
+      }
+      .language-button[aria-pressed="true"] {
+        background: #102a43;
+        border-color: #102a43;
+        color: #fff;
+      }
       footer { color: #52606d; font-size: .9rem; margin-top: 20px; text-align: center; }
       @media (max-width: 560px) {
         main { padding: 16px 12px 40px; }
@@ -41,9 +68,13 @@
         <h1>四目並べ プライバシーポリシー</h1>
         <p class="meta">発効日・最終更新日: 2026年9月10日</p>
         <p class="meta">運営者表示: 四目並べ (Connect Four)（正式な運営主体名・所在地は公開前に更新）</p>
+        <nav class="language-switcher" aria-label="Language selection">
+          <button class="language-button" type="button" data-language="ja" aria-pressed="true">日本語</button>
+          <button class="language-button" type="button" data-language="en" aria-pressed="false">English</button>
+        </nav>
       </header>
 
-      <article lang="ja">
+      <article lang="ja" data-language-panel="ja">
         <h2>日本語</h2>
         <p>四目並べ（以下「本アプリ」）は、ゲームを安心して利用いただくため、以下のとおり情報を取り扱います。本ポリシーは、対応言語（日本語、英語、スペイン語、ポルトガル語（ブラジル）、韓国語）を提供する市場を対象とします。</p>
 
@@ -79,7 +110,7 @@
         <p>本ポリシーは、機能、外部SDK、法令またはストア要件の変更に応じて改定することがあります。重要な変更がある場合は、更新日を表示します。</p>
       </article>
 
-      <article lang="en">
+      <article lang="en" data-language-panel="en">
         <h2>English</h2>
         <p class="meta">Operator shown in the App: Connect Four (the formal legal operator name and address will be updated before publication)</p>
         <p>Connect Four (the “App”) handles information as described below so that you can use the game with confidence. This policy applies to markets where the App provides its supported languages: Japanese, English, Spanish, Brazilian Portuguese, and Korean.</p>
@@ -118,5 +149,36 @@
 
       <footer>Connect Four Privacy Policy</footer>
     </main>
+    <script>
+      (() => {
+        const supportedLanguages = ["ja", "en"];
+        const browserLanguage = navigator.language.toLowerCase().startsWith("en") ? "en" : "ja";
+        const buttons = document.querySelectorAll("[data-language]");
+        const panels = document.querySelectorAll("[data-language-panel]");
+
+        const setLanguage = (language) => {
+          const selectedLanguage = supportedLanguages.includes(language) ? language : "ja";
+          document.documentElement.lang = selectedLanguage;
+          document.title = selectedLanguage === "en"
+            ? "Connect Four Privacy Policy"
+            : "四目並べ プライバシーポリシー";
+
+          buttons.forEach((button) => {
+            const isSelected = button.dataset.language === selectedLanguage;
+            button.setAttribute("aria-pressed", String(isSelected));
+          });
+
+          panels.forEach((panel) => {
+            panel.hidden = panel.dataset.languagePanel !== selectedLanguage;
+          });
+        };
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => setLanguage(button.dataset.language));
+        });
+
+        setLanguage(browserLanguage);
+      })();
+    </script>
   </body>
 </html>
