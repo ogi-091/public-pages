@@ -9,6 +9,7 @@
 | 四目並べ（Connect Four） | [プライバシーポリシー](https://ogi-091.github.io/public-pages/connect-four/privacy-policy/) | [編集対象](site/connect-four/privacy-policy/index.html) |
 | 複利計算 | [プライバシーポリシー](https://ogi-091.github.io/public-pages/fukuri-keisan/privacy-policy/) | [編集対象](site/fukuri-keisan/privacy-policy/index.html) |
 | Gobblet Goblins | [プライバシーポリシー](https://ogi-091.github.io/public-pages/gobblet-goblins/privacy-policy/) | [編集対象](site/gobblet-goblins/privacy-policy/index.html) |
+| aso-reports（運営者の個人用ツール） | [プライバシーポリシー](https://ogi-091.github.io/public-pages/aso-reports/privacy-policy/) | [編集対象](site/aso-reports/privacy-policy/index.html) |
 
 ## 共通テンプレート
 
